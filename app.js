@@ -102,9 +102,20 @@ function animate() {
     animationId = requestAnimationFrame(animate)
     c.clearRect(0, 0, canvas.width, canvas.height)
     player.draw()
-    projectiles.forEach((projectile) => 
+    projectiles.forEach((projectile, index) => 
         {
             projectile.update()
+
+            if (projectile.x + projectile.radius < 0 ||
+                projectile.x - projectile.radius > canvas.width ||
+                projectile.y + projectile.radius < 0 ||
+                projectile.y - projectile.radius > canvas.height
+                ) {
+                setTimeout(() => {
+                    projectiles.splice(index, 1)
+                    console.log("done");
+                }, 0)
+            }
         })
 
     enemies.forEach((enemy, index) => {
@@ -133,7 +144,6 @@ addEventListener('click', (event) => {
         x: Math.cos(angle),
         y: Math.sin(angle)
     }
-    console.log(velocity);
     projectiles.push(new Projectile(canvas.width / 2, canvas.height / 2, 5, "red", velocity))
 })
 
