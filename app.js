@@ -4,8 +4,7 @@ const c = canvas.getContext("2d")
 canvas.width = innerWidth
 canvas.height = innerHeight
 
-score = document.querySelector("#score")
-console.log(score);
+const scoreEl = document.querySelector("#score")
 
 class Player {
     constructor(x, y, radius, color) {
@@ -132,6 +131,7 @@ function spawnEnemies() {
 }
 
 let animationId
+let score = 0
 function animate() {
     animationId = requestAnimationFrame(animate)
     c.fillStyle = "rgba(0, 0, 0, 0.1)"
@@ -171,11 +171,12 @@ function animate() {
             //When projectiles touch enemy
             if (dist - enemy.radius - projectile.radius < 1)
              {
-
                 for(let i = 0; i < enemy.radius * 2; i++){
                     particles.push(new Particles (projectile.x, projectile.y, Math.random() * 2, enemy.color, {x: (Math.random() - 0.5) * 5, y: (Math.random() - 0.5) * 5}))
                 }
                 if(enemy.radius - 10 > 10) {
+                    score += 100
+                    scoreEl.innerHTML = score
                     gsap.to(enemy, {
                         radius:enemy.radius - 10
                     })
@@ -183,6 +184,8 @@ function animate() {
                         projectiles.splice(projectileIndex, 1)
                     }, 0)
                 } else {
+                score += 250
+                scoreEl.innerHTML = score
                 setTimeout(() => {
                     enemies.splice(index, 1)
                     projectiles.splice(projectileIndex, 1)
