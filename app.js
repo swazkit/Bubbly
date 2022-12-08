@@ -6,6 +6,10 @@ canvas.height = innerHeight
 
 const scoreEl = document.querySelector("#score")
 
+const startButton = document.querySelector("#start")
+
+const model = document.querySelector("#modelEl")
+
 class Player {
     constructor(x, y, radius, color) {
         this.x = x
@@ -207,6 +211,8 @@ addEventListener('click', (event) => {
 })
 
 
-
-animate()
-spawnEnemies()
+startButton.addEventListener('click', () => {
+    animate()
+    spawnEnemies()
+    model.style.display = "none"
+})

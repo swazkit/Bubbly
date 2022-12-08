@@ -1,9 +1,55 @@
-body {
-    margin: 0;
+* {
+    font-family: sans-serif;
 }
 
-div {
+body {
+    margin: 0;
+    background-color: rgb(0, 0, 0);
+}
+
+h1 {
+    font-size: 3rem;
+    color: rgba(0, 0, 0, .8);
+    font-weight: bold;
+}
+
+p {
+    color: rgba(0, 0, 0, .5);
+}
+
+.score {
     position: fixed;
     color: #FFFFFF;
     user-select: none;
+}
+
+.container {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Game-over {
+    background-color: #FFFFFF;
+    max-width: 420px;
+    width: 100%;
+    padding: 30px;
+    text-align: center;
+    height: 220px;
+    border-radius: 20px;
+}
+
+.button {
+    margin-top: 10px;
+    background-color: rgb(83, 184, 214);
+    color: #FFFFFF;
+    border-radius: 100px;
+    font-size: 1.5rem;
+    padding-block: 5px;
+    cursor: pointer;
 }
