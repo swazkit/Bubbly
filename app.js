@@ -4,6 +4,9 @@ const c = canvas.getContext("2d")
 canvas.width = innerWidth
 canvas.height = innerHeight
 
+score = document.querySelector("#score")
+console.log(score);
+
 class Player {
     constructor(x, y, radius, color) {
         this.x = x
@@ -125,7 +128,6 @@ function spawnEnemies() {
             y: Math.sin(angle)
         }
         enemies.push(new Enemy(x, y, radius, color, velocity))
-        console.log(enemies);
     }, 1000);
 }
 
@@ -151,7 +153,6 @@ function animate() {
                 ) {
                 setTimeout(() => {
                     projectiles.splice(index, 1)
-                    console.log("done");
                 }, 0)
             }
         })
