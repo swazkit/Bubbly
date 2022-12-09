@@ -10,6 +10,8 @@ const startButton = document.querySelector("#start")
 
 const model = document.querySelector("#modelEl")
 
+const bigScoreEl = document.querySelector("#bigScoreEl")
+
 class Player {
     constructor(x, y, radius, color) {
         this.x = x
@@ -167,6 +169,8 @@ function animate() {
         const dist = Math.hypot(player.x - enemy.x, player.y - enemy.y)
         if (dist - enemy.radius - player.radius < 1) {
             cancelAnimationFrame(animationId)
+            model.style.display = "flex"
+            bigScoreEl.innerHTML = score
         }
 
         projectiles.forEach((projectile, projectileIndex) => {
