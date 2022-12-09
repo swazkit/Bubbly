@@ -107,12 +107,24 @@ class Particles {
 const x = canvas.width / 2
 const y = canvas.height / 2
 
-const player = new Player(x, y, 10, '#FFFFFF')
+let player = new Player(x, y, 10, '#FFFFFF')
 
 
-const projectiles = []
-const particles = []
-const enemies = []
+let projectiles = []
+let particles = []
+let enemies = []
+let score = 0
+
+function init() {
+    player = new Player(x, y, 10, '#FFFFFF')
+    projectiles = []
+    particles = []
+    enemies = []
+    score = 0
+    scoreEl.innerHTML = score
+    bigScoreEl.innerHTML = score
+    startButton.innerHTML = "Restart"
+}
 
 function spawnEnemies() {
     setInterval(() => {
@@ -137,7 +149,6 @@ function spawnEnemies() {
 }
 
 let animationId
-let score = 0
 function animate() {
     animationId = requestAnimationFrame(animate)
     c.fillStyle = "rgba(0, 0, 0, 0.1)"
@@ -180,7 +191,7 @@ function animate() {
             if (dist - enemy.radius - projectile.radius < 1)
              {
                 for(let i = 0; i < enemy.radius * 2; i++){
-                    particles.push(new Particles (projectile.x, projectile.y, Math.random() * 2, enemy.color, {x: (Math.random() - 0.5) * 5, y: (Math.random() - 0.5) * 5}))
+                    particles.push(new Particles (projectile.x, projectile.y, Math.random() * 2, enemy.color, {x: (Math.random() - 0.5) * 8, y: (Math.random() - 0.5) * 8}))
                 }
                 if(enemy.radius - 10 > 10) {
                     score += 100
@@ -208,14 +219,15 @@ function animate() {
 addEventListener('click', (event) => {
     const angle  = Math.atan2(event.clientY - canvas.height / 2, event.clientX - canvas.width / 2)
     const velocity = {
-        x: Math.cos(angle) * 4,
-        y: Math.sin(angle) * 4
+        x: Math.cos(angle) * 8,
+        y: Math.sin(angle) * 8
     }
     projectiles.push(new Projectile(canvas.width / 2, canvas.height / 2, 5, "#FFFFFF", velocity))
 })
 
 
 startButton.addEventListener('click', () => {
+    init()
     animate()
     spawnEnemies()
     model.style.display = "none"
